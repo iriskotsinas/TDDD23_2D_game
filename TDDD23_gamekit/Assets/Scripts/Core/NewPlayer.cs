@@ -79,7 +79,7 @@ public class NewPlayer : PhysicsObject
 
     void Start()
     {
-        Cursor.visible = false;
+        Cursor.visible = true;
         SetUpCheatItems();
         health = maxHealth;
         animatorFunctions = GetComponent<AnimatorFunctions>();
