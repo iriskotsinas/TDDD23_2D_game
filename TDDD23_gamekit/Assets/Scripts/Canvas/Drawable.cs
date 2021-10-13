@@ -372,7 +372,7 @@ namespace FreeDraw
                 groupName = "vehicles";
 
                 //Object Spawner Script
-                GameObject playerObj = GameObject.Find("Player1");
+                GameObject playerObj = GameObject.Find("Player");
                 ObjectSpawnerFromML m_someOtherScriptOnAnotherGameObject = GameObject.FindObjectOfType(typeof(ObjectSpawnerFromML)) as ObjectSpawnerFromML;
                 GameObject newObj = m_someOtherScriptOnAnotherGameObject.MakeObject(predictionName, playerObj, groupName);
                 onScreenGameObjects.Add(newObj);
