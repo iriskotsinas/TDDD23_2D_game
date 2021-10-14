@@ -6,6 +6,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using SimpleJSON;
+using UnityEngine.UI;
 
 namespace FreeDraw
 {
@@ -104,6 +105,8 @@ namespace FreeDraw
         // Changes the surrounding pixels of the world_point to the static pen_colour
         public void PenBrush(Vector2 world_point)
         {
+
+            Debug.Log("CALLED PEN BRUSH");
             Vector2 pixel_pos = WorldToPixelCoordinates(world_point);
 
             cur_colors = drawable_texture.GetPixels32();
@@ -139,11 +142,15 @@ namespace FreeDraw
             bool mouse_held_down = Input.GetMouseButton(0);
             if (mouse_held_down && !no_drawing_on_current_drag)
             {
+
                 // Convert mouse coordinates to world coordinates
                 Vector2 mouse_world_position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 // Check if the current mouse position overlaps our image
                 Collider2D hit = Physics2D.OverlapPoint(mouse_world_position, Drawing_Layers.value);
+
+                Debug.Log(hit);
+
                 if (hit != null && hit.transform != null)
                 {
                     // We're over the texture we're drawing on!
@@ -219,7 +226,7 @@ namespace FreeDraw
             int array_pos = y * (int)drawable_sprite.rect.width + x;
 
             // Check if this is a valid position
-            if (array_pos > cur_colors.Length || array_pos < 0)
+            if (array_pos >= cur_colors.Length || array_pos < 0)
                 return;
 
             cur_colors[array_pos] = color;

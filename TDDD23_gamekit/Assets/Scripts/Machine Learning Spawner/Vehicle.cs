@@ -8,6 +8,7 @@ public class Vehicle : MonoBehaviour
     private Vector2 origPos;
     public string vehicleName;
     public bool returnToOrigin = false;
+
     void Start()
     {
         origPos = transform.position;
@@ -21,4 +22,13 @@ public class Vehicle : MonoBehaviour
             transform.position = origPos;
         }
     }
+
+
+    //void OnTriggerExit2D(Collider2D col)
+    //{
+    //    if (col.gameObject.name.Equals("Player"))
+    //        GameControl.playerNearTheCarDoor = false;
+    //}
+
+    
 }

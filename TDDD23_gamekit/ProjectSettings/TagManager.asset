@@ -7,6 +7,12 @@ TagManager:
   - Gem
   - PreventStuckOnWall
   - Startup
+  - Animal
+  - Weapon
+  - Armor
+  - Vehicle
+  - Food
+  - Other
   layers:
   - Default
   - TransparentFX
@@ -26,7 +32,7 @@ TagManager:
   - Bombs
   - SoundTrigger
   - Post Processing
-  - 
+  - Vehicle
   - 
   - 
   - 
