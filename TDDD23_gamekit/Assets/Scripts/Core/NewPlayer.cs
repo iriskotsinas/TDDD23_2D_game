@@ -9,6 +9,11 @@ using UnityEngine.SceneManagement;
 
 public class NewPlayer : PhysicsObject
 {
+
+    private GameObject thePlayer;
+    public ObjectSpawnerFromML MachineLearningScript;
+    public Sprite mySprite;
+
     [Header ("Reference")]
     public AudioSource audioSource;
     [SerializeField] private Animator animator;
@@ -77,6 +82,8 @@ public class NewPlayer : PhysicsObject
     public AudioClip stepSound;
     [System.NonSerialized] public int whichHurtSound;
 
+
+
     void Start()
     {
         Cursor.visible = true;
@@ -85,7 +92,12 @@ public class NewPlayer : PhysicsObject
         animatorFunctions = GetComponent<AnimatorFunctions>();
         origLocalScale = transform.localScale;
         recoveryCounter = GetComponent<RecoveryCounter>();
+
+        thePlayer = GameObject.Find("Player");
+        MachineLearningScript = thePlayer.transform.Find("Object Spawner").GetComponent<ObjectSpawnerFromML>();
         
+
+
         //Find all sprites so we can hide them when the player dies.
         graphicSprites = GetComponentsInChildren<SpriteRenderer>();
 
@@ -135,6 +147,30 @@ public class NewPlayer : PhysicsObject
             //Punch
             if (Input.GetMouseButtonDown(0))
             {
+                //Debug.Log(MachineLearningScript.weaponSprites);
+                
+                thePlayer.transform.Find("Blast").GetComponent<SpriteRenderer>().sprite = MachineLearningScript.weaponSprites[0];
+                var polygonCollider = thePlayer.transform.Find("AttackHit").GetComponent<PolygonCollider2D>();
+                var _sprite = thePlayer.transform.Find("Blast").GetComponent<SpriteRenderer>().sprite;
+                polygonCollider.pathCount = 0;
+                polygonCollider.pathCount = _sprite.GetPhysicsShapeCount();
+
+                List<Vector2> path = new List<Vector2>();
+                for (int i = 0; i < polygonCollider.pathCount; i++)
+                {
+                    path.Clear();
+                    _sprite.GetPhysicsShape(i, path);
+                    polygonCollider.SetPath(i, path.ToArray());
+                }
+                //var _collider = thePlayer.transform.Find("AttackHit").GetComponent<PolygonCollider2D>();
+                //var _sprite = thePlayer.transform.Find("Blast").GetComponent<SpriteRenderer>();
+
+                //Vector2 S = _sprite.sprite.bounds.size;
+                //_collider.bounds = S;
+                //_collider.offset = new Vector2(0, 0);
+
+
+                //myGameObject
                 animator.SetTrigger("attack");
                 Shoot(false);
             }

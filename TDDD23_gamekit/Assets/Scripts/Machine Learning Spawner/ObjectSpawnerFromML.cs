@@ -76,12 +76,7 @@ public class ObjectSpawnerFromML : MonoBehaviour
         }
         else
         {
-            var _collider = FindObjectOfType<BoxCollider2D>();
-            var _sprite = FindObjectOfType<SpriteRenderer>();
-
-            Vector2 S = _sprite.sprite.bounds.size;
-            _collider.size = S;
-            _collider.offset = new Vector2(0, 0);
+            resizeSprite();
         }
         
         
@@ -129,4 +124,16 @@ public class ObjectSpawnerFromML : MonoBehaviour
 
         return newObject;
     }
+
+
+    public void resizeSprite()
+    {
+        var _collider = FindObjectOfType<BoxCollider2D>();
+        var _sprite = FindObjectOfType<SpriteRenderer>();
+
+        Vector2 S = _sprite.sprite.bounds.size;
+        _collider.size = S;
+        _collider.offset = new Vector2(0, 0);
+    }
+
 }
