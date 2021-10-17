@@ -44,6 +44,17 @@ namespace FreeDraw
         Sprite drawable_sprite;
         public Texture2D drawable_texture; // PUBLIC??
 
+        public Text firstPrediction;
+        public Text secondPrediction;
+        public Text thirdPrediction;
+        public Text fourthPrediction;
+        public Text fifthPrediction;
+
+        public GameObject buttonGroup;
+
+        private int whichPrediction;
+        private bool predictionClicked;
+
         Vector2 previous_drag_position;
         Color[] clean_colours_array;
         Color transparent;
@@ -139,6 +150,13 @@ namespace FreeDraw
         void Update()
         {
             // Is the user holding down the left mouse button?
+            if (firstPrediction.text == "")
+            {
+                buttonGroup.SetActive(false);
+            } else {
+                buttonGroup.SetActive(true);
+            }
+
             bool mouse_held_down = Input.GetMouseButton(0);
             if (mouse_held_down && !no_drawing_on_current_drag)
             {
@@ -156,6 +174,7 @@ namespace FreeDraw
                     // We're over the texture we're drawing on!
                     // Use whatever function the current brush is
                     current_brush(mouse_world_position);
+                    Save();
                 }
 
                 else
@@ -283,8 +302,20 @@ namespace FreeDraw
         // Changes every pixel to be the reset colour
         public void ResetCanvas()
         {
+            firstPrediction.text = "";
+            secondPrediction.text = "";
+            thirdPrediction.text = "";
+            fourthPrediction.text = "";
+            fifthPrediction.text = "";
+
             drawable_texture.SetPixels(clean_colours_array);
             drawable_texture.Apply();
+        }
+
+        public void Cancel()
+        {
+            ResetCanvas();
+            DrawCanvas.CanvasIsOpen = true;
         }
 
         void Awake()
@@ -339,10 +370,7 @@ namespace FreeDraw
 
             yield return StartCoroutine(CallPost(baseURL, JSON_Body));
 
-
-
-            ResetCanvas();
-
+            // ResetCanvas();
         }
 
         //void Start()
@@ -372,28 +400,73 @@ namespace FreeDraw
                 JSONNode classification_result = JSON.Parse(request.downloadHandler.text);
                 Debug.Log("ML GUESSED: " + classification_result["prediction"] + " with " + classification_result["confidence"] + " % confidence in group: " + classification_result["group"]);
 
-                string predictionName = classification_result["prediction"];
-                string groupName = classification_result["group"];
+                firstPrediction.text = classification_result["other_pred"][0]["prediction"] + " (" + classification_result["other_pred"][0]["group"] + ")";
+                secondPrediction.text = classification_result["other_pred"][1]["prediction"] + " (" + classification_result["other_pred"][1]["group"] + ")";
+                thirdPrediction.text = classification_result["other_pred"][2]["prediction"] + " (" + classification_result["other_pred"][2]["group"] + ")";
+                fourthPrediction.text = classification_result["other_pred"][3]["prediction"] + " (" + classification_result["other_pred"][3]["group"] + ")";
+                fifthPrediction.text = classification_result["other_pred"][4]["prediction"] + " (" + classification_result["other_pred"][4]["group"] + ")";
 
-                predictionName = "car";
-                groupName = "vehicles";
-
-                //Object Spawner Script
-                GameObject playerObj = GameObject.Find("Player");
-                ObjectSpawnerFromML m_someOtherScriptOnAnotherGameObject = GameObject.FindObjectOfType(typeof(ObjectSpawnerFromML)) as ObjectSpawnerFromML;
-                GameObject newObj = m_someOtherScriptOnAnotherGameObject.MakeObject(predictionName, playerObj, groupName);
-                onScreenGameObjects.Add(newObj);
-
-                //TODO: FIXED AMOUNT
-                if(onScreenGameObjects.Count > 5)
+                if (predictionClicked)
                 {
-                    onScreenGameObjects.RemoveAt(onScreenGameObjects.Count - 1);
+                    string predictionName = classification_result["other_pred"][whichPrediction]["prediction"];
+                    string groupName = classification_result["other_pred"][whichPrediction]["group"];
+
+                    // predictionName = "car";
+                    // groupName = "vehicles";
+
+                    //Object Spawner Script
+                    GameObject playerObj = GameObject.Find("Player");
+                    ObjectSpawnerFromML m_someOtherScriptOnAnotherGameObject = GameObject.FindObjectOfType(typeof(ObjectSpawnerFromML)) as ObjectSpawnerFromML;
+                    GameObject newObj = m_someOtherScriptOnAnotherGameObject.MakeObject(predictionName, playerObj, groupName);
+                    onScreenGameObjects.Add(newObj);
+
+                    // TODO: FIXED AMOUNT
+                    if (onScreenGameObjects.Count > 5)
+                    {
+                        onScreenGameObjects.RemoveAt(onScreenGameObjects.Count - 1);
+                    }
+
+                    // This closes canvas. We need to do that after the request has been send back.
+                    predictionClicked = false;
+                    ResetCanvas();
+                    DrawCanvas.CanvasIsOpen = true;
                 }
             }
-
-            // This closes canvas. We need to do that after the request has been send back.
-            DrawCanvas.CanvasIsOpen = true;
         }
 
+        public void SetFirstPred()
+        {
+            whichPrediction = 0;
+            predictionClicked = true;
+            Save();
+        }
+
+        public void SetSecondPred()
+        {
+            whichPrediction = 1;
+            predictionClicked = true;
+            Save();
+        }
+
+        public void SetThirdPred()
+        {
+            whichPrediction = 2;
+            predictionClicked = true;
+            Save();
+        }
+
+        public void SetFourthPred()
+        {
+            whichPrediction = 3;
+            predictionClicked = true;
+            Save();
+        }
+
+        public void SetFifthPred()
+        {
+            whichPrediction = 4;
+            predictionClicked = true;
+            Save();
+        }
     }
 }
