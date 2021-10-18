@@ -11,8 +11,9 @@ public class NewPlayer : PhysicsObject
 {
 
     private GameObject thePlayer;
-    public ObjectSpawnerFromML MachineLearningScript;
-    public Sprite mySprite;
+    private ObjectSpawnerFromML MachineLearningScript;
+    public Sprite originalSprite;
+    public static bool weaponInHand = false;
 
     [Header ("Reference")]
     public AudioSource audioSource;
@@ -65,6 +66,8 @@ public class NewPlayer : PhysicsObject
     public int health;
     public int maxHealth;
     public int maxAmmo;
+    public bool isWearingArmor = false;
+    public int addedHealth = 0;
 
     [Header ("Sounds")]
     public AudioClip deathSound;
@@ -93,13 +96,16 @@ public class NewPlayer : PhysicsObject
         origLocalScale = transform.localScale;
         recoveryCounter = GetComponent<RecoveryCounter>();
 
+        //Get the script so we can get weapon sprites
         thePlayer = GameObject.Find("Player");
         MachineLearningScript = thePlayer.transform.Find("Object Spawner").GetComponent<ObjectSpawnerFromML>();
         
-
-
         //Find all sprites so we can hide them when the player dies.
         graphicSprites = GetComponentsInChildren<SpriteRenderer>();
+
+        //Set default size for attack hit and blast
+        thePlayer.transform.Find("AttackHit").GetComponent<PolygonCollider2D>().transform.localScale = new Vector3(20f, 20f, 0);
+        thePlayer.transform.Find("Blast").transform.localScale = new Vector3(1f, 1f, 0);
 
         SetGroundType();
     }
@@ -107,6 +113,19 @@ public class NewPlayer : PhysicsObject
     private void Update()
     {
         ComputeVelocity();
+
+        if (isWearingArmor)
+        {
+            maxHealth = 5 + addedHealth; //(Max health is 5)
+        }
+        else
+        {
+            maxHealth = 5;
+            if(health > maxHealth)
+            {
+                health = maxHealth;
+            }
+        }
     }
 
     protected void ComputeVelocity()
@@ -147,30 +166,6 @@ public class NewPlayer : PhysicsObject
             //Punch
             if (Input.GetMouseButtonDown(0))
             {
-                //Debug.Log(MachineLearningScript.weaponSprites);
-                
-                thePlayer.transform.Find("Blast").GetComponent<SpriteRenderer>().sprite = MachineLearningScript.weaponSprites[0];
-                var polygonCollider = thePlayer.transform.Find("AttackHit").GetComponent<PolygonCollider2D>();
-                var _sprite = thePlayer.transform.Find("Blast").GetComponent<SpriteRenderer>().sprite;
-                polygonCollider.pathCount = 0;
-                polygonCollider.pathCount = _sprite.GetPhysicsShapeCount();
-
-                List<Vector2> path = new List<Vector2>();
-                for (int i = 0; i < polygonCollider.pathCount; i++)
-                {
-                    path.Clear();
-                    _sprite.GetPhysicsShape(i, path);
-                    polygonCollider.SetPath(i, path.ToArray());
-                }
-                //var _collider = thePlayer.transform.Find("AttackHit").GetComponent<PolygonCollider2D>();
-                //var _sprite = thePlayer.transform.Find("Blast").GetComponent<SpriteRenderer>();
-
-                //Vector2 S = _sprite.sprite.bounds.size;
-                //_collider.bounds = S;
-                //_collider.offset = new Vector2(0, 0);
-
-
-                //myGameObject
                 animator.SetTrigger("attack");
                 Shoot(false);
             }
@@ -469,4 +464,10 @@ public class NewPlayer : PhysicsObject
             GameManager.Instance.GetInventoryItem(cheatItems[i], null);
         }
     }
+
+    public bool checkForWeaponChange()
+    {
+        return false;
+    }
+
 }

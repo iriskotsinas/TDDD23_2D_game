@@ -30,7 +30,8 @@ public class ObjectSpawnerFromML : MonoBehaviour
         
     }
 
-    public GameObject MakeObject(string name, GameObject player, string groupName)
+    //TODO: If withVoice is true, then we get half the speed, damage, armor etc on the things we spawn.
+    public GameObject MakeObject(string name, GameObject player, string groupName, bool withVoice = false)
     {
 
         if (groupName == "animals")
@@ -63,25 +64,26 @@ public class ObjectSpawnerFromML : MonoBehaviour
         }
 
 
-        
 
-        if (groupName == "vehicles")
-        {
-            var _collider = FindObjectOfType<CapsuleCollider2D>();
-            var _sprite = FindObjectOfType<SpriteRenderer>();
 
-            Vector2 S = _sprite.sprite.bounds.size;
-            _collider.size = S;
-            _collider.offset = new Vector2(0, 0);
-        }
-        else
-        {
-            resizeSprite();
-        }
-        
-        
+        //if (groupName == "vehicles")
+        //{
+        //    var _collider = FindObjectOfType<CapsuleCollider2D>();
+        //    var _sprite = FindObjectOfType<SpriteRenderer>();
 
-        
+        //    Vector2 S = _sprite.sprite.bounds.size;
+        //    _collider.size = S;
+        //    _collider.offset = new Vector2(0, 0);
+        //}
+        //else
+        //{
+        //    resizeSprite();
+        //}
+
+        PolygonCollider2D polygonCollider = FindObjectOfType<PolygonCollider2D>();
+        Sprite _sprite = newObj.GetComponent<SpriteRenderer>().sprite;
+
+        setColliderToFitSprite(ref polygonCollider, ref _sprite);
 
         return newObj;
     }
@@ -91,7 +93,7 @@ public class ObjectSpawnerFromML : MonoBehaviour
         int arrayIdx = Array.FindIndex(objectSprites, s => s.name == name);
         Sprite objectSprite = objectSprites[arrayIdx];
         string objectName = objectSprite.name;
-        GameObject newObject = Instantiate(ObjectPrefab, player.transform.position + new Vector3(1.0f,1.0f,0.0f), player.transform.rotation);
+        GameObject newObject = Instantiate(ObjectPrefab, player.transform.position + new Vector3(4.0f,8.0f,0.0f), Quaternion.identity);
         newObject.name = objectName;
 
         if (groupName == "animals")
@@ -126,14 +128,18 @@ public class ObjectSpawnerFromML : MonoBehaviour
     }
 
 
-    public void resizeSprite()
+    public void setColliderToFitSprite(ref PolygonCollider2D polygonCollider, ref Sprite _sprite)
     {
-        var _collider = FindObjectOfType<BoxCollider2D>();
-        var _sprite = FindObjectOfType<SpriteRenderer>();
+        polygonCollider.pathCount = 0;
+        polygonCollider.pathCount = _sprite.GetPhysicsShapeCount();
 
-        Vector2 S = _sprite.sprite.bounds.size;
-        _collider.size = S;
-        _collider.offset = new Vector2(0, 0);
+        List<Vector2> path = new List<Vector2>();
+        for (int i = 0; i < polygonCollider.pathCount; i++)
+        {
+            path.Clear();
+            _sprite.GetPhysicsShape(i, path);
+            polygonCollider.SetPath(i, path.ToArray());
+        }
     }
 
 }

@@ -15,7 +15,8 @@ public class AttackHit : MonoBehaviour
     private int targetSide = 1; //Is the attack target on the left or right side of this object?
     [SerializeField] private GameObject parent; //This must be specified manually, as some objects will have a parent that is several layers higher
     [SerializeField] private bool isBomb = false; //Is the object a bomb that blows up when touching the player?
-    [SerializeField] private int hitPower = 1; 
+    [SerializeField] public int hitPower = 1; //Changes in Pickup.cs / Slots.cs for the player
+    public bool isWeaponInHand = false; //Changes in Pickup.cs / Slots.cs for the player
 
     // Use this for initialization
     void Start()
@@ -24,6 +25,14 @@ public class AttackHit : MonoBehaviour
         otherwise it will blow up when touching the object shooting it!*/
         if (isBomb) StartCoroutine(TempColliderDisable());
     }
+
+    //private void Update()
+    //{
+    //    if (parent.tag == "Player" && isWeaponInHand)
+    //    {
+    //        hitPower = GameObject.FindGameObjectWithTag("Player").GetComponent<Weapon>().hitPower;
+    //    }
+    //}
 
     void OnTriggerStay2D(Collider2D col)
     {

@@ -55,6 +55,7 @@ public class HUD : MonoBehaviour
         healthBarWidth = (float)NewPlayer.Instance.health / (float)NewPlayer.Instance.maxHealth;
         healthBarWidthEased += (healthBarWidth - healthBarWidthEased) * Time.deltaTime * healthBarWidthEased;
         healthBar.transform.localScale = new Vector2(healthBarWidthEased, 1);
+        GameObject.Find("HealthText").GetComponent<Text>().text = (float)NewPlayer.Instance.health + " / " + (float)NewPlayer.Instance.maxHealth;
 
         //Controls the width of the ammo bar based on the player's total ammo
         if (ammoBar)
