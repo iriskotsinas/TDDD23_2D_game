@@ -59,6 +59,8 @@ public class NewPlayer : PhysicsObject
     [System.NonSerialized] public bool pounded;
     [System.NonSerialized] public bool pounding;
     [System.NonSerialized] public bool shooting = false;
+    public bool isMounted = false;
+    public bool isOnAnimal = true;
 
     [Header ("Inventory")]
     public float ammo;
@@ -114,6 +116,15 @@ public class NewPlayer : PhysicsObject
     {
         ComputeVelocity();
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (!DrawCanvas.CanvasIsOpen)
+            {
+                GameObject.Find("DrawCanvas").GetComponent<DrawCanvas>().Pause();
+            }    
+        }
+
+
         if (isWearingArmor)
         {
             maxHealth = 5 + addedHealth; //(Max health is 5)
@@ -153,21 +164,28 @@ public class NewPlayer : PhysicsObject
                 Jump(1f);
             }
 
-            //Flip the graphic's localScale
-            if (move.x > 0.01f)
+            if (!isMounted)
             {
-               graphic.transform.localScale = new Vector3(origLocalScale.x, transform.localScale.y, transform.localScale.z);
+                //Flip the graphic's localScale
+                if (move.x > 0.01f)
+                {
+                    graphic.transform.localScale = new Vector3(origLocalScale.x, transform.localScale.y, transform.localScale.z);
+                }
+                else if (move.x < -0.01f)
+                {
+                    graphic.transform.localScale = new Vector3(-origLocalScale.x, transform.localScale.y, transform.localScale.z);
+                }
             }
-            else if (move.x < -0.01f)
-            {
-               graphic.transform.localScale = new Vector3(-origLocalScale.x, transform.localScale.y, transform.localScale.z);
-            }
+            
 
             //Punch
             if (Input.GetMouseButtonDown(0))
             {
-                animator.SetTrigger("attack");
-                Shoot(false);
+                if (!isMounted || isOnAnimal)
+                {
+                    animator.SetTrigger("attack");
+                    Shoot(false);
+                }
             }
 
             //Secondary attack (currently shooting) with right click

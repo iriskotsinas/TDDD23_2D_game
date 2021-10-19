@@ -16,7 +16,7 @@ public class Vehicle : MonoBehaviour
     public float speed;
     public float maxSpeed;
     public bool isOnWater = false;
-    private string type;
+    public string typeOfVehicle;
     public bool spawnedWithVoice = false;
 
     void Start()
@@ -24,56 +24,57 @@ public class Vehicle : MonoBehaviour
         if(flyingVehicles.Contains(vehicleName))
         {
             speed = 7f;
-            maxSpeed = 50f;
-            type = "flyingVehicles";
+            maxSpeed = 10f;
+            typeOfVehicle = "flyingVehicles";
 
         }
         if (fastVehicles.Contains(vehicleName))
         {
             speed = 10f;
-            maxSpeed = 100f;
-            type = "fastVehicles";
+            maxSpeed = 20f;
+            typeOfVehicle = "fastVehicles";
         }
         if (slowVehicles.Contains(vehicleName))
         {
             speed = 5f;
-            maxSpeed = 40f;
-            type = "slowVehicles";
+            maxSpeed = 5f;
+            typeOfVehicle = "slowVehicles";
         }
         if (waterVehicles.Contains(vehicleName))
         {
-            type = "waterVehicles";
+            typeOfVehicle = "waterVehicles";
 
             if (isOnWater)
             {
                 speed = 10f;
-                maxSpeed = 100f;
+                maxSpeed = 15f;
             }
             else
             {
-                speed = 1f;
-                maxSpeed = 10f;
+                speed = 2f;
+                maxSpeed = 2f;
             }
         }
 
         if (spawnedWithVoice)
         {
-
+            speed = speed / 2;
+            maxSpeed = maxSpeed / 2;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isOnWater && type == "waterVehicles")
+        if (isOnWater && typeOfVehicle == "waterVehicles")
         {
             speed = 10f;
-            maxSpeed = 100f;
+            maxSpeed = 15f;
         }
-        else
+        else if(typeOfVehicle == "waterVehicles")
         {
-            speed = 1f;
-            maxSpeed = 10f;
+            speed = 2f;
+            maxSpeed = 2f;
         }
     }
 

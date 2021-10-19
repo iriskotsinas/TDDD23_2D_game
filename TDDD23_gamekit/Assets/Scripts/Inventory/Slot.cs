@@ -10,10 +10,7 @@ public class Slot : MonoBehaviour
     public bool spawnedByVoice;
 
     private List<Vector2[]> originalPath = new List<Vector2[]>();
-    private int pathCount;
-
-    //private List<Vector2> points = new List<Vector2>();
-    //private List<Vector2> simplifiedPoints = new List<Vector2>();
+    private int pathCount; 
 
     private void Start()
     {
@@ -39,6 +36,7 @@ public class Slot : MonoBehaviour
 
         foreach (Transform child in transform)
         {
+            Debug.Log(child);
             GameObject playerObj = GameObject.Find("Player");
             ObjectSpawnerFromML m_someOtherScriptOnAnotherGameObject = GameObject.FindObjectOfType(typeof(ObjectSpawnerFromML)) as ObjectSpawnerFromML;
 
@@ -99,8 +97,19 @@ public class Slot : MonoBehaviour
         {
             if (child.gameObject.GetComponent<itemInformation>().groupName == "foods")
             {
-                Debug.Log("Added HP"); //TODO
-                GameObject.Destroy(child.gameObject);
+
+                if(NewPlayer.Instance.health < NewPlayer.Instance.maxHealth)
+                {
+                    GameManager.Instance.hud.HealthBarHurt();
+                    NewPlayer.Instance.health += child.gameObject.GetComponent<itemInformation>().healthRegen;
+                    GameObject.Destroy(child.gameObject);
+
+                    if(NewPlayer.Instance.health > NewPlayer.Instance.maxHealth)
+                    {
+                        NewPlayer.Instance.health = NewPlayer.Instance.maxHealth;
+                    }
+                }
+                
             }
             else
             {

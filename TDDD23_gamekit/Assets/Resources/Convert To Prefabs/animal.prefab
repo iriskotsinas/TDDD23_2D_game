@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1198578503583546415}
   - component: {fileID: -6153167953839473564}
   - component: {fileID: -8292032359158043744}
+  - component: {fileID: -2913480977287453672}
   m_Layer: 0
   m_Name: animal
   m_TagString: Animal
@@ -48,7 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animalName: 
-  returnToOrigin: 0
+  spawnedWithVoice: 0
+  animalSpeed: 0
+  animalMaxSpeed: 0
+  animalDamage: 0
+  scaleSize: 0
+  typeOfAnimal: 
 --- !u!114 &8737554368558892972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +138,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &-8292032359158043744
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -163,3 +169,22 @@ PolygonCollider2D:
       - {x: -0.5877852, y: -0.80901706}
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
+--- !u!114 &-2913480977287453672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2184540486355005802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adad95595c4c0d468dbb33bd75ef9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myMessage: Press 'E' to use the mount!
+  unmount: {fileID: 0}
+  mountedPos: {x: 0, y: 0, z: 0}
+  moveSpeed: 0
+  maxSpeed: 0
+  player: {fileID: 0}
+  isAnimal: 1

@@ -19,6 +19,9 @@ public class PlayerMount : MonoBehaviour
     public float maxSpeed = 0f;//Max speed of Vehicle
 
     public GameObject player;
+    private GameObject[] bodyParts;
+    private GameObject[] attackPart;
+    public bool isAnimal = false; //Set to true on animal prefab
 
     // Start is called before the first frame update
     void Start()
@@ -29,70 +32,186 @@ public class PlayerMount : MonoBehaviour
         //unmount = transform;          // Save original transform
         player = GameObject.Find("Player");
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+        bodyParts = GameObject.FindGameObjectsWithTag("BodyPartsToTurnOff");
+        attackPart = GameObject.FindGameObjectsWithTag("AttackParts");
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        if (mounted)
+        {
+            transform.localScale = transform.localScale;
+            player.transform.position = transform.position - new Vector3(0f,2f,0f);
+        }
+
+
+
         if (useMount && Input.GetKeyDown(KeyCode.E) && (!mounted))  // if we entered the mountTrigger and press E
         {
             useMount = false; // we don't want the GUI to show the message anymore and do not want this code to be able to be executed again while we sit on the mount
-            moveSpeed += GetComponent<Vehicle>().speed; // Add the speed of the vehicle we are in
-            maxSpeed += GetComponent<Vehicle>().maxSpeed;
+
+            if (isAnimal)
+            {
+                moveSpeed += gameObject.GetComponent<Animal>().animalSpeed; // Add the speed of the vehicle we are in
+                maxSpeed += gameObject.GetComponent<Animal>().animalMaxSpeed;
+                NewPlayer.Instance.isMounted = true;
+                NewPlayer.Instance.isOnAnimal = true;
+            }
+            else
+            {
+                moveSpeed += gameObject.GetComponent<Vehicle>().speed; // Add the speed of the vehicle we are in
+                maxSpeed += gameObject.GetComponent<Vehicle>().maxSpeed;
+                NewPlayer.Instance.isMounted = true;
+                NewPlayer.Instance.isOnAnimal = false;
+                foreach (GameObject part in attackPart)
+                {
+                    part.SetActive(false);
+                }
+            }
+           
+            
             mounted = true;
+
             player.transform.parent = transform;
-            player.SetActive(false);
+   
+            player.GetComponent<CapsuleCollider2D>().enabled = false;
+
+            foreach (GameObject part in bodyParts)
+            {
+                part.SetActive(false);
+            }
+            
         }
 
         else if (mounted && Input.GetKeyDown(KeyCode.E))
         {
             //Get off the vehicle
-            player.SetActive(true);
-            player.transform.rotation = Quaternion.identity; //Reset rotation of player
-            useMount = false;
-            transform.position = new Vector3(transform.position.x - 1.5f, transform.position.y + 1.5f); //Move away from object
+            player.GetComponent<CapsuleCollider2D>().enabled = true;
 
-            // Remove added speed
-            moveSpeed -= GetComponent<Vehicle>().speed; 
-            maxSpeed += GetComponent<Vehicle>().maxSpeed;
+            foreach (GameObject part in bodyParts)
+            {
+                part.SetActive(true);
+            }
+            foreach (GameObject part in attackPart)
+            {
+                part.SetActive(true);
+            }
+
+            player.transform.rotation = Quaternion.identity; //Reset rotation of player
+            player.transform.position = new Vector3(transform.position.x + 3.5f, transform.position.y + 1.5f, 0); //Move away from object
+            useMount = false;
+
+            if (isAnimal)
+            {
+                // Remove added speed
+                moveSpeed -= gameObject.GetComponent<Animal>().animalSpeed;
+                maxSpeed -= gameObject.GetComponent<Animal>().animalMaxSpeed;
+            }
+            else
+            {
+                // Remove added speed
+                moveSpeed -= gameObject.GetComponent<Vehicle>().speed;
+                maxSpeed -= gameObject.GetComponent<Vehicle>().maxSpeed;
+            }
+            
 
             player.transform.parent = null; //Detach from parent
             mounted = false;
+            NewPlayer.Instance.isMounted = false; //So the player know it is not mounted
             myMessage = "";
             //objControl = unmount.transform; //Reset back to player controller
             
         }
 
-        //Check if car/animal is upright
-        if ((Vector3.Dot(transform.up, Vector3.down) <= 0))
+        
+        if (isAnimal) 
         {
+            //Move forward
             if (Input.GetKey(KeyCode.D) && mounted)
             {
-                // forward
                 if (rb2d.velocity.magnitude > maxSpeed)
                 {
                     rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
                 }
                 else
                 {
-                    rb2d.AddForce(new Vector3(1f, 0f, 0f) * (moveSpeed * 500) * Time.deltaTime);
+                    rb2d.AddForce(new Vector3(1f, 0f, 0f) * (moveSpeed * 200) * Time.deltaTime);
                 }
             }
+            //Move backwards
             if (Input.GetKey(KeyCode.A) && mounted)
             {
-                // backwards
                 if (rb2d.velocity.magnitude > maxSpeed)
                 {
                     rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
                 }
                 else
                 {
-                    rb2d.AddForce(new Vector3(-1f, 0f, 0f) * (moveSpeed * 500) * Time.deltaTime);
+                    rb2d.AddForce(new Vector3(-1f, 0f, 0f) * (moveSpeed * 200) * Time.deltaTime);
                 }
-            
+            }
+            //Fly
+            if (Input.GetKey(KeyCode.W) && mounted && gameObject.GetComponent<Animal>().typeOfAnimal == "flyingAnimals")
+            {
+                if (rb2d.velocity.magnitude > maxSpeed)
+                {
+                    rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
+                }
+                else
+                {
+                    rb2d.AddForce(new Vector3(0f, 1f, 0f) * (moveSpeed * 200) * Time.deltaTime);
+                }
             }
         }
+        else
+        {
+            //Check if car is upright
+            if ((Vector3.Dot(transform.up, Vector3.down) <= 0) || gameObject.GetComponent<Vehicle>().typeOfVehicle == "flyingVehicles")
+            {
+                //Move forward
+                if (Input.GetKey(KeyCode.D) && mounted)
+                {
+                    if (rb2d.velocity.magnitude > maxSpeed)
+                    {
+                        rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
+                    }
+                    else
+                    {
+                        rb2d.AddForce(new Vector3(1f, 0f, 0f) * (moveSpeed * 200) * Time.deltaTime);
+                    }
+                }
+                //Move backwards
+                if (Input.GetKey(KeyCode.A) && mounted)
+                {
+                    if (rb2d.velocity.magnitude > maxSpeed)
+                    {
+                        rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
+                    }
+                    else
+                    {
+                        rb2d.AddForce(new Vector3(-1f, 0f, 0f) * (moveSpeed * 200) * Time.deltaTime);
+                    }
+
+                }
+                //Fly if youre an airplane
+                if (Input.GetKey(KeyCode.W) && mounted && gameObject.GetComponent<Vehicle>().typeOfVehicle == "flyingVehicles")
+                {
+                    // backwards
+                    if (rb2d.velocity.magnitude > maxSpeed)
+                    {
+                        rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
+                    }
+                    else
+                    {
+                        rb2d.AddForce(new Vector3(0f, 1f, 0f) * (moveSpeed * 200) * Time.deltaTime);
+                    }
+                }
+            }
+        }
+
+        
             
     }
 

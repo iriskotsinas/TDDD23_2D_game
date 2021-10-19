@@ -68,6 +68,7 @@ namespace FreeDraw
         private readonly string baseURL = "http://localhost:8080/image";
 
         public List<GameObject> onScreenGameObjects = new List<GameObject>();
+        
 
 
 
@@ -149,6 +150,12 @@ namespace FreeDraw
 
         void Update()
         {
+            //This will be called if the canvas is up, otherwise pause will be called from NewPlayer.cs
+            if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Escape))
+            {
+                Cancel();
+            }
+
             // Is the user holding down the left mouse button?
             if (firstPrediction.text == "")
             {
@@ -314,6 +321,7 @@ namespace FreeDraw
 
         public void Cancel()
         {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); //Reset cursor
             ResetCanvas();
             DrawCanvas.CanvasIsOpen = true;
         }
@@ -436,6 +444,7 @@ namespace FreeDraw
 
         public void SetFirstPred()
         {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); //Reset cursor
             whichPrediction = 0;
             predictionClicked = true;
             Save();
@@ -443,6 +452,7 @@ namespace FreeDraw
 
         public void SetSecondPred()
         {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); //Reset cursor
             whichPrediction = 1;
             predictionClicked = true;
             Save();
@@ -450,6 +460,7 @@ namespace FreeDraw
 
         public void SetThirdPred()
         {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); //Reset cursor
             whichPrediction = 2;
             predictionClicked = true;
             Save();
@@ -457,6 +468,7 @@ namespace FreeDraw
 
         public void SetFourthPred()
         {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); //Reset cursor
             whichPrediction = 3;
             predictionClicked = true;
             Save();
@@ -464,6 +476,7 @@ namespace FreeDraw
 
         public void SetFifthPred()
         {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); //Reset cursor
             whichPrediction = 4;
             predictionClicked = true;
             Save();

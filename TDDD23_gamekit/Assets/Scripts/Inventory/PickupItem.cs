@@ -99,6 +99,7 @@ public class PickupItem : MonoBehaviour
                             itemButton.GetComponent<itemInformation>().spawnedWithVoice = foodObject.spawnedWithVoice;
                             itemButton.GetComponent<itemInformation>().objectName = foodObject.foodName;
                             itemButton.GetComponent<itemInformation>().groupName = "foods";
+                            itemButton.GetComponent<itemInformation>().healthRegen = foodObject.healthRegen;
                         }
                         else if (gameObject.TryGetComponent<Other>(out Other otherObject))
                         {

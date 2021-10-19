@@ -26,14 +26,6 @@ public class AttackHit : MonoBehaviour
         if (isBomb) StartCoroutine(TempColliderDisable());
     }
 
-    //private void Update()
-    //{
-    //    if (parent.tag == "Player" && isWeaponInHand)
-    //    {
-    //        hitPower = GameObject.FindGameObjectWithTag("Player").GetComponent<Weapon>().hitPower;
-    //    }
-    //}
-
     void OnTriggerStay2D(Collider2D col)
     {
         //Determine which side the attack is on
