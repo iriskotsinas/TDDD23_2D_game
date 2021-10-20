@@ -164,7 +164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2110454307519831740
 RectTransform:
   m_ObjectHideFlags: 0
@@ -747,7 +747,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 1316e19543ce74c0ba0b48d4df2f6b68, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -1028,7 +1028,13 @@ MonoBehaviour:
   Reset_Canvas_On_Play: 1
   Reset_Colour: {r: 1, g: 1, b: 1, a: 1}
   drawable_texture: {fileID: 0}
-  RTexture: {fileID: 8400000, guid: 1316e19543ce74c0ba0b48d4df2f6b68, type: 2}
+  firstPrediction: {fileID: 0}
+  secondPrediction: {fileID: 0}
+  thirdPrediction: {fileID: 0}
+  fourthPrediction: {fileID: 0}
+  fifthPrediction: {fileID: 0}
+  buttonGroup: {fileID: 0}
+  RTexture: {fileID: 0}
   onScreenGameObjects: []
 --- !u!212 &5056115381325913375
 SpriteRenderer:
@@ -1078,7 +1084,7 @@ SpriteRenderer:
   m_Size: {x: 7.5, y: 7.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &753457546720112722
@@ -1796,6 +1802,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   theCanvas: {fileID: 5958747836372483090}
   renderCamera: {fileID: 4909215245642624425}
+  cursorTexture: {fileID: 0}
 --- !u!1 &8994264821068509206
 GameObject:
   m_ObjectHideFlags: 0

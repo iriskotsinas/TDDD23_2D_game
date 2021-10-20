@@ -15,6 +15,7 @@ TagManager:
   - Other
   - BodyPartsToTurnOff
   - AttackParts
+  - Water
   layers:
   - Default
   - TransparentFX

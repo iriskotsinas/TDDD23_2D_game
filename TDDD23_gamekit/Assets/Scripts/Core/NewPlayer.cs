@@ -281,16 +281,17 @@ public class NewPlayer : PhysicsObject
             launch = hurtDirection * (hurtLaunchPower.x);
             recoveryCounter.counter = 0;
 
-            if (health <= 0)
+            if (health - hitPower <= 0)
             {
+                health = 0;
                 StartCoroutine(Die());
+                GameManager.Instance.hud.HealthBarHurt();
             }
             else
             {
                 health -= hitPower;
+                GameManager.Instance.hud.HealthBarHurt();
             }
-
-            GameManager.Instance.hud.HealthBarHurt();
         }
     }
 
