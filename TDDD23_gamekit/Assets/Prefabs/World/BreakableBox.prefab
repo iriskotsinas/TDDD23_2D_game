@@ -319,7 +319,7 @@ MonoBehaviour:
   brokenSprite: {fileID: 0}
   deathParticles: {fileID: 4196980256168965084}
   destroyAfterDeath: 1
-  health: 3
+  health: 1
   instantiator: {fileID: 114151467440667452}
   hitSound: {fileID: 8300000, guid: def22ce97dc3f41bda43f7520ec1bb2d, type: 3}
   recoveryCounter: {fileID: 0}
