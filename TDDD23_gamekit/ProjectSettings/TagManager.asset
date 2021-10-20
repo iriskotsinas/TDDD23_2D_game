@@ -16,6 +16,7 @@ TagManager:
   - BodyPartsToTurnOff
   - AttackParts
   - Water
+  - MenuButton
   layers:
   - Default
   - TransparentFX
