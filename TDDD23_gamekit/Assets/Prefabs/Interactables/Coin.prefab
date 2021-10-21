@@ -95,10 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00585e398033247af958235b57925db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceSound: {fileID: 8300000, guid: 6f158957132d344eaaef9d19f81635eb, type: 3}
   audioSource: {fileID: 82740274442362448}
-  launchOnStart: 0
+  bounceSound: {fileID: 8300000, guid: 6f158957132d344eaaef9d19f81635eb, type: 3}
   collectableTrigger: {fileID: 61441269642897126}
+  launchOnStart: 0
 --- !u!82 &82740274442362448
 AudioSource:
   m_ObjectHideFlags: 0
@@ -243,8 +243,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439237074007162}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.77715, y: 0.77715, z: 0.77715}
+  m_LocalPosition: {x: 0, y: 0.010101, z: 0}
+  m_LocalScale: {x: 0.23819305, y: 0.23819305, z: 0.23819305}
   m_Children:
   - {fileID: 4936311683882626}
   - {fileID: 4119524408509958}
@@ -266,6 +266,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -290,8 +291,8 @@ SpriteRenderer:
   m_SortingLayerID: -1524664889
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4815cf2442b234125bb98deb0e304fc3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7a5fc31f5f8254cad803278bfcb2f84f, type: 3}
+  m_Color: {r: 1, g: 0.8075141, b: 0.4764151, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -318,7 +319,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.38, y: 1.38}
+    oldSize: {x: 3.55, y: 3.55}
     newSize: {x: 0.1, y: 0.1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -340,13 +341,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 1
+  audioSource: {fileID: 0}
+  bounceSound: {fileID: 8300000, guid: 4606c2e00ff414c58b47cffcae0c3a4e, type: 3}
   collectSounds:
   - {fileID: 8300000, guid: 547ff3e60e7034deab642a204a1443d5, type: 3}
-  bounceSound: {fileID: 8300000, guid: 4606c2e00ff414c58b47cffcae0c3a4e, type: 3}
-  audioSource: {fileID: 0}
-  itemName: 
   itemAmount: 1
-  image: {fileID: 0}
+  itemName: 
+  UIImage: {fileID: 0}
 --- !u!82 &82676315453445592
 AudioSource:
   m_ObjectHideFlags: 0
@@ -489,8 +490,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450440028710878}
   m_LocalRotation: {x: -0, y: -0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2867529, y: 1.2867529, z: 1.2867529}
+  m_LocalPosition: {x: 0, y: 0.0775, z: 0}
+  m_LocalScale: {x: 4.678151, y: 4.678151, z: 4.678151}
   m_Children: []
   m_Father: {fileID: 4849546616006642}
   m_RootOrder: 1
@@ -510,6 +511,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -585,7 +587,7 @@ Transform:
   m_GameObject: {fileID: 1886051832400466}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2867529, y: 1.2867529, z: 1.2867529}
+  m_LocalScale: {x: 4.826898, y: 4.826898, z: 4.826898}
   m_Children: []
   m_Father: {fileID: 4849546616006642}
   m_RootOrder: 0
@@ -605,6 +607,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:

@@ -47,6 +47,13 @@ public class EnemyBase : MonoBehaviour
                 NewPlayer.Instance.cameraEffects.Shake(100, 1);
                 health -= hitPower;
                 animator.SetTrigger("hurt");
+                // Walker enemy;
+
+                deathParticles.SetActive(true);
+                if (GetComponent<Walker>() != null) Instantiate(deathParticles, GetComponent<Walker>().transform.position, Quaternion.identity);
+                else if (GetComponent<Flyer>() != null) Instantiate(deathParticles, GetComponent<Flyer>().transform.position, Quaternion.identity);
+                // deathParticles.transform.parent = transform.parent;
+                // deathParticles.SetActive(false);
 
                 audioSource.pitch = (1);
                 audioSource.PlayOneShot(hitSound);

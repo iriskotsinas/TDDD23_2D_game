@@ -196,7 +196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544079854360990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4509474277575976}
@@ -242,8 +242,8 @@ SpriteRenderer:
   m_SortingLayerID: 616639249
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fd7a24dde3328457883e754e10a1d919, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 073912b4c5db245ae8844a71637cb3ba, type: 3}
+  m_Color: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10127,7 +10127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4196980256168965084}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 25.479992, y: 1.0899999, z: 0}
+  m_LocalPosition: {x: -0.41, y: 1.0899999, z: 0}
   m_LocalScale: {x: 0.86046, y: 0.86046004, z: 0.86046004}
   m_Children:
   - {fileID: 1516723165924499255}
@@ -10388,7 +10388,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
+      scalar: 1
       minScalar: 0.3
       maxCurve:
         serializedVersion: 2
@@ -11642,7 +11642,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 9657d3a8feb764244a9f3fa44169efb2, type: 3}
+    - sprite: {fileID: 21300000, guid: 89e7cc5693be94e49a0d91b6503e2370, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:

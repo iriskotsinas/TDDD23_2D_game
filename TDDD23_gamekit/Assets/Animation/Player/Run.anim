@@ -496,7 +496,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.45898035, y: 0.24642977, z: 0}
+        value: {x: 0.5191237, y: 0.44278196, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -2378,7 +2378,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.45898035
+        value: 0.5191237
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2397,7 +2397,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.24642977
+        value: 0.44278196
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2906,6 +2906,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 10
+    messageOptions: 0
+  - time: 0
+    functionName: HideSlash
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 0.016666668
     functionName: LandEffect
