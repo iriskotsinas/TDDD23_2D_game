@@ -36,7 +36,7 @@ public class DrawCanvas : MonoBehaviour
         var coordinates = spawn.transform.position + (spawn.transform.forward * 4);
         renderCamera.transform.position = new Vector3(coordinates.x, coordinates.y, renderCamera.transform.position.z);
         Time.timeScale = 0f; // can be set to higher if we want the game to keep on going
-        Cursor.SetCursor(cursorTexture, new Vector2(0f, 250f), CursorMode.Auto);
+        Cursor.SetCursor(cursorTexture, new Vector2(0f, 75f), CursorMode.Auto);
     }
 
 }
