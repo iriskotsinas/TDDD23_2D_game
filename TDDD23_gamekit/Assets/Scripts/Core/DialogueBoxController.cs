@@ -49,6 +49,7 @@ public class DialogueBoxController : MonoBehaviour
     private bool typing = true;
     [SerializeField] private GameObject gameObjectToSwitch;
     [SerializeField] private GameObject doorKey;
+    [SerializeField] private string character;
 
     // Update is called once per frame
     void Update()
@@ -121,6 +122,7 @@ public class DialogueBoxController : MonoBehaviour
 
     public void Appear(string fName, string characterName, DialogueTrigger dTrigger, bool useItemAfterClose, AudioClip[] audioL, AudioClip[] audioC, string finishTalkingAnimBool, GameObject finishTalkingActivateGObject, string finishTalkingActivateGOString, bool r)
     {
+        character = characterName;
         repeat = r;
         finishTalkingAnimatorBool = finishTalkingAnimBool;
         finishTalkingActivateGameObject = finishTalkingActivateGObject;
@@ -214,9 +216,11 @@ public class DialogueBoxController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         //When the dialog is finished
-        gameObjectToSwitch.GetComponent<switchCharacter>().changeObject(); //Make NPC follow us
-        doorKey.SetActive(true);
-
+        if (character == "Unknown Book")
+        {
+            gameObjectToSwitch.GetComponent<switchCharacter>().changeObject(); //Make NPC follow us
+            doorKey.SetActive(true);
+        }
         NewPlayer.Instance.Freeze(false);
         animator.SetInteger("choiceSelection", 1);
     }

@@ -9,7 +9,7 @@ public class changeScene : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(sceneName: "DemoScene");
+            SceneManager.LoadScene(sceneName: "DemoLevel");
         }
     }
 }
