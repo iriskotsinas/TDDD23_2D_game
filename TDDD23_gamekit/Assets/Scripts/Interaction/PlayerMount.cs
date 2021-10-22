@@ -8,7 +8,7 @@ public class PlayerMount : MonoBehaviour
     private bool mounted; // this was actually implemented for further control when mounted, not needed at this current state
 
     private GUIStyle guiStyle = new GUIStyle(); //create a new variable
-    public string myMessage = "Press 'E' to use the mount!";
+    //public string myMessage = "Press 'E' to use the mount!";
     private Rigidbody2D rb2d;
 
     //public Transform objControl;     // reference to the transform that our movement input will affect
@@ -22,6 +22,7 @@ public class PlayerMount : MonoBehaviour
     private GameObject[] bodyParts;
     private GameObject[] attackPart;
     public bool isAnimal = false; //Set to true on animal prefab
+    [SerializeField] private Animator iconAnimator; //The E icon animator
 
     // Start is called before the first frame update
     void Start()
@@ -159,22 +160,24 @@ public class PlayerMount : MonoBehaviour
             
     }
 
-    void OnGUI()
-    {
-        if (useMount) // when this is set to true, we want the text to be shown
-        {
-            guiStyle.fontSize = 24;
-            GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 10, 100, 20), myMessage, guiStyle);
-        }
-    }
+    //void OnGUI()
+    //{
+    //    if (useMount) // when this is set to true, we want the text to be shown
+    //    {
+    //        //guiStyle.fontSize = 24;
+    //        //GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 10, 100, 20), myMessage, guiStyle);
+    //        // TRIGGER E ANIMATION
+    //    }
+    //}
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         // enable the Label showing further instructions and 'enable' the key input for mounting
         // but only do so if the trigger we entered is the trigger of a mount
-        myMessage = "Press 'E' to use the mount!";
+        //myMessage = "Press 'E' to use the mount!";
         if (collision.gameObject.tag == "Player")
         {
+            iconAnimator.SetBool("active", true);
             useMount = true; // now we enable the piece of code in update, so that only the key needs to be pressed
         }
     }
@@ -184,7 +187,8 @@ public class PlayerMount : MonoBehaviour
         // disable the piece of code for mounting when we exit that trigger
         if (collision.gameObject.tag == "Player")
         {
-            myMessage = "";
+            //myMessage = "";
+            iconAnimator.SetBool("active", false);
             useMount = false; // disable the code so that we can press E as often as we want when we do not enter a mountTrigger
         }
     }
@@ -302,7 +306,7 @@ public class PlayerMount : MonoBehaviour
             player.transform.parent = null; //Detach from parent
             mounted = false;
             NewPlayer.Instance.isMounted = false; //So the player know it is not mounted
-            myMessage = "";
+            //myMessage = "";
             //objControl = unmount.transform; //Reset back to player controller
         }
     }

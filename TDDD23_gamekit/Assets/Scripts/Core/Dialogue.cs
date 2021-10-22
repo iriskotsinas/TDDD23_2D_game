@@ -52,5 +52,68 @@ public class Dialogue : MonoBehaviour
             "And I'll also give you a new ability!",
             "In this case, how about a generic DOWNWARD SMASH? Simply attack while pressing down in mid-air!"
         });
+
+
+        //=============Introduction level dialog=============
+        dialogue.Add("BookA", new string[] {
+            "Hey! You're finally up..",
+            "You must have a lot of questions, about why you're here and who I am.",
+            "But do not worry, everything will make sense in time.",
+            "We can start by making sure you know the basics.",
+            "Try drawing something and I will try to guess what it is.",
+            "I might guess wrong but hey, its your drawing skills at fault, not mine.",
+            "*draw something*",
+            "Wonderful!",
+            "Now try saying \"car\" loudly and see what happends.",
+            "*wait for speech*",
+            "Looking good.",
+            "I'll be leaving it up to you to explore the rest.",
+            "You are ready to go on a long journey to find out who you are.",
+            "I'll be by your side to help you along the way.",
+            "You got this, lets go!",
+            "* spawn key *"
+        });
+
+        dialogue.Add("BookB", new string[] {
+            "",
+        });
+
+        dialogue.Add("BookAChoice1", new string[] {
+            "",
+            "",
+            "Test",
+        });
+        dialogue.Add("BookAChoice2", new string[] {
+            "",
+            "",
+            "Test",
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -11,6 +11,7 @@ public class PickupItem : MonoBehaviour
     private bool canPickup = false;
     private int ARMOR_SLOT = 4;
     private int WEAPON_SLOT = 5;
+    [SerializeField] private Animator iconAnimator; //The E icon animator
 
 
     //Inventory should only be able to store "foods, other"
@@ -23,7 +24,7 @@ public class PickupItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canPickup && Input.GetKeyDown(KeyCode.E))
+        if(canPickup) //) && Input.GetKeyDown(KeyCode.E))
         {
             //Check if its a weapon
             if(gameObject.TryGetComponent<Weapon>(out Weapon weaponObject))
@@ -100,17 +101,26 @@ public class PickupItem : MonoBehaviour
                             itemButton.GetComponent<itemInformation>().objectName = foodObject.foodName;
                             itemButton.GetComponent<itemInformation>().groupName = "foods";
                             itemButton.GetComponent<itemInformation>().healthRegen = foodObject.healthRegen;
+                            Instantiate(itemButton, inventory.slots[i].transform, false);
+                            Destroy(gameObject);
+                            break;
                         }
-                        else if (gameObject.TryGetComponent<Other>(out Other otherObject))
+                        else if (gameObject.TryGetComponent<Other>(out Other otherObject)) //Check if we pickup other
                         {
+                            iconAnimator.SetBool("active", true);
                             itemButton.GetComponent<itemInformation>().spawnedWithVoice = otherObject.spawnedWithVoice;
                             itemButton.GetComponent<itemInformation>().objectName = otherObject.otherName;
                             itemButton.GetComponent<itemInformation>().groupName = "others";
+                            if (Input.GetKeyDown(KeyCode.E))
+                            {
+                                Instantiate(itemButton, inventory.slots[i].transform, false);
+                                iconAnimator.SetBool("active", false);
+                                Destroy(gameObject);
+                                break;
+                            }
                         }
 
-                        Instantiate(itemButton, inventory.slots[i].transform, false);
-                        Destroy(gameObject);
-                        break;
+                        
                     }
                 }
             }
@@ -132,7 +142,10 @@ public class PickupItem : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         canPickup = false;
-
+        if(itemButton.GetComponent<itemInformation>().groupName == "others")
+        {
+            iconAnimator.SetBool("active", false);
+        }
     }
 
     public void setColliderToFitSprite(ref PolygonCollider2D polygonCollider, ref Sprite _sprite)

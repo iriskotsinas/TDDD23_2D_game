@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 /*Controls the dialogue box and it's communication with Dialogue.cs, which contains the character dialogue*/
 
@@ -23,10 +24,10 @@ public class DialogueBoxController : MonoBehaviour
     [SerializeField] private AudioClip[] typeSounds;
 
     [Header("Text Mesh Pro")]
-    [SerializeField] TextMeshProUGUI choice1Mesh;
-    [SerializeField] TextMeshProUGUI choice2Mesh;
-    [SerializeField] TextMeshProUGUI nameMesh;
-    [SerializeField] TextMeshProUGUI textMesh;
+    [SerializeField] Text choice1Mesh;
+    [SerializeField] Text choice2Mesh;
+    [SerializeField] Text nameMesh;
+    [SerializeField] Text textMesh;
 
     [Header("Other")]
     private bool ableToAdvance;
@@ -46,6 +47,8 @@ public class DialogueBoxController : MonoBehaviour
     private bool horizontalKeyIsDown = true;
     private bool submitKeyIsDown = true;
     private bool typing = true;
+    [SerializeField] private GameObject gameObjectToSwitch;
+    [SerializeField] private GameObject doorKey;
 
     // Update is called once per frame
     void Update()
@@ -209,6 +212,11 @@ public class DialogueBoxController : MonoBehaviour
         finishTalkingActivateGameObject = null;
         finishTalkingActivateGameObjectString = "";
         yield return new WaitForSeconds(1f);
+
+        //When the dialog is finished
+        gameObjectToSwitch.GetComponent<switchCharacter>().changeObject(); //Make NPC follow us
+        doorKey.SetActive(true);
+
         NewPlayer.Instance.Freeze(false);
         animator.SetInteger("choiceSelection", 1);
     }
