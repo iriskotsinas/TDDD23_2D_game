@@ -47,8 +47,8 @@ public class PickupItem : MonoBehaviour
 
                     //Reshape the collider to match the sprite
                     setColliderToFitSprite(ref polygonCollider, ref _sprite);
-                    polygonCollider.transform.localScale = new Vector3(3f, 3f, 0);
-                    thePlayer.transform.Find("Blast").transform.localScale = new Vector3(3f, 3f, 0);
+                    polygonCollider.transform.localScale = new Vector3(4f, 4f, 0);
+                    thePlayer.transform.Find("Blast").transform.localScale = new Vector3(4f, 4f, 0);
 
                     //Update the attack hit damage
                     GameObject.FindGameObjectWithTag("Player").transform.Find("AttackHit").GetComponent<AttackHit>().isWeaponInHand = true;
