@@ -53,41 +53,75 @@ public class Dialogue : MonoBehaviour
             "In this case, how about a generic DOWNWARD SMASH? Simply attack while pressing down in mid-air!"
         });
 
-
         //=============Introduction level dialog=============
-        dialogue.Add("BookA", new string[] {
+
+        // Check if Mac or Windows
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            dialogue.Add("BookA", new string[] {
             "Hey! You're finally up..",
             "You must have a lot of questions, about why you're here and who I am.",
             "But do not worry, everything will make sense in time.",
+            "I can assure you that this isn't a dream, so don't go do anything stupid.",
             "We can start by making sure you know the basics.",
-            "Try drawing something and I will try to guess what it is.",
+            "You are able to draw and I will try to guess what it is.\nI will make the object appear and you will be able to use it.",
             "I might guess wrong but hey, its your drawing skills at fault, not mine.",
-            "*draw something*",
-            "Wonderful!",
-            "Now try saying \"car\" loudly and see what happends.",
-            "*wait for speech*",
+            "Before doing any further, is it okay for me to hear what you're saying?\n(Grant permission to enable microphone)",
+            "Awesome, now try saying \"car\" loudly and see what happends.",
             "Looking good.",
             "I'll be leaving it up to you to explore the rest.",
             "You are ready to go on a long journey to find out who you are.",
             "I'll be by your side to help you along the way.",
-            "You got this, lets go!",
-            "* spawn key *"
+            "You got this, lets go!"
         });
 
-        dialogue.Add("BookB", new string[] {
-            "",
-        });
+            dialogue.Add("BookB", new string[] {
+            });
 
-        dialogue.Add("BookAChoice1", new string[] {
+            dialogue.Add("BookAChoice1", new string[] {
             "",
             "",
-            "Test",
-        });
-        dialogue.Add("BookAChoice2", new string[] {
             "",
             "",
-            "Test",
-        });
+            "",
+            "",
+            "",
+            "Yes, its okay!",
+            });
+
+
+            dialogue.Add("BookAChoice2", new string[] {
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "No, just let me leave!",
+            });
+        }
+        else
+        {
+            dialogue.Add("BookA", new string[] {
+            "Hey! You're finally up..",
+            "You must have a lot of questions, about why you're here and who I am.",
+            "But do not worry, everything will make sense in time.",
+            "I can assure you that this isn't a dream, so don't go do anything stupid.",
+            "We can start by making sure you know the basics.",
+            "You are able to draw and I will try to guess what it is.\nI will make the object appear and you will be able to use it.",
+            "I might guess wrong but hey, its your drawing skills at fault, not mine.",
+            "It happends to be that I can't hear your very well today so you will have to spell it out if you want to.",
+            "You can do this by using the magnifying icon on the lower right",
+            "I'll be leaving it up to you to explore the rest.",
+            "You are ready to go on a long journey to find out who you are.",
+            "I'll be by your side to help you along the way.",
+            "You got this, lets go!" });
+        }
+            
+
+        
+        
 
 
 

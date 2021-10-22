@@ -38,7 +38,7 @@ public class DialogueBoxController : MonoBehaviour
     private string[] characterDiologue;
     private string[] choiceDiologue;
     private DialogueTrigger dialogueTrigger;
-    [System.NonSerialized] public bool extendConvo;
+    [System.NonSerialized] public bool extendConvo = true;
     private string finishTalkingAnimatorBool;
     private string finishTalkingActivateGameObjectString;
     private string fileName;
@@ -65,6 +65,11 @@ public class DialogueBoxController : MonoBehaviour
                 {
                     if (index < choiceLocation || (extendConvo && index < characterDiologue.Length - 1))
                     {
+                        if (extendConvo) //If we go on then they agreed to mic (Windows)
+                        {
+                            VoiceSpawner.isListening = true;
+                            PlayerPrefs.SetString("isListening", "true");
+                        }
                         if (ableToAdvance)
                         {
                             StartCoroutine(Advance());
@@ -101,11 +106,13 @@ public class DialogueBoxController : MonoBehaviour
                 if (animator.GetInteger("choiceSelection") == 1)
                 {
                     animator.SetInteger("choiceSelection", 2);
-                    extendConvo = true;
+                    extendConvo = false;
+                    VoiceSpawner.isListening = false;
+                    PlayerPrefs.SetString("isListening", "false");
                 }
                 else
                 {
-                    extendConvo = false;
+                    extendConvo = true;
                     animator.SetInteger("choiceSelection", 1);
                 }
                 audioSource.PlayOneShot(selectionSound);
@@ -186,7 +193,7 @@ public class DialogueBoxController : MonoBehaviour
         index = -1;
         submitKeyIsDown = false;
         ableToAdvance = false;
-        extendConvo = false;
+        extendConvo = true;
         choiceLocation = 0;
         ShowChoices(false);
 

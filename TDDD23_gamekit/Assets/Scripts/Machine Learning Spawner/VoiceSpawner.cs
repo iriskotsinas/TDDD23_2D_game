@@ -714,19 +714,32 @@ public class VoiceSpawner : MonoBehaviour
         };
 
 
-    public static bool isListening = true;
+    public static bool isListening = false;
+    private bool hasStarted;
 
 
     private void Start()
     { 
         keywordRecognizer = new KeywordRecognizer(all_cat.ToArray());
         keywordRecognizer.OnPhraseRecognized += RecVoice;
+        hasStarted = false;
+    }
 
-        if (isListening)
+    public void Update()
+    {
+        if (isListening && !hasStarted)
         {
             keywordRecognizer.Start();
+            hasStarted = true;
+        }
+        if(PlayerPrefs.GetString("isListening") == "true" && !hasStarted)
+        {
+            keywordRecognizer.Start();
+            hasStarted = true;
         }
     }
+
+
 
     private void RecVoice(PhraseRecognizedEventArgs speech)
     {

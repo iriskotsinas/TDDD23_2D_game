@@ -45,12 +45,23 @@ namespace FreeDraw
         public Texture2D drawable_texture; // PUBLIC??
 
         public Text firstPrediction;
+        public Text firstPredClass;
+
         public Text secondPrediction;
+        public Text secondPredClass;
+
         public Text thirdPrediction;
+        public Text thirdPredClass;
+
         public Text fourthPrediction;
+        public Text fourthPredClass;
+
         public Text fifthPrediction;
+        public Text fifthPredClass;
 
         public GameObject buttonGroup;
+
+
 
         private int whichPrediction;
         private bool predictionClicked;
@@ -408,11 +419,20 @@ namespace FreeDraw
                 JSONNode classification_result = JSON.Parse(request.downloadHandler.text);
                 Debug.Log("ML GUESSED: " + classification_result["prediction"] + " with " + classification_result["confidence"] + " % confidence in group: " + classification_result["group"]);
 
-                firstPrediction.text = classification_result["other_pred"][0]["prediction"] + " (" + classification_result["other_pred"][0]["group"] + ")";
-                secondPrediction.text = classification_result["other_pred"][1]["prediction"] + " (" + classification_result["other_pred"][1]["group"] + ")";
-                thirdPrediction.text = classification_result["other_pred"][2]["prediction"] + " (" + classification_result["other_pred"][2]["group"] + ")";
-                fourthPrediction.text = classification_result["other_pred"][3]["prediction"] + " (" + classification_result["other_pred"][3]["group"] + ")";
-                fifthPrediction.text = classification_result["other_pred"][4]["prediction"] + " (" + classification_result["other_pred"][4]["group"] + ")";
+                firstPrediction.text = classification_result["other_pred"][0]["prediction"];
+                firstPredClass.text = classification_result["other_pred"][0]["group"];
+
+                secondPrediction.text = classification_result["other_pred"][1]["prediction"];
+                secondPredClass.text = classification_result["other_pred"][1]["group"];
+
+                thirdPrediction.text = classification_result["other_pred"][2]["prediction"];
+                thirdPredClass.text = classification_result["other_pred"][2]["group"];
+
+                fourthPrediction.text = classification_result["other_pred"][3]["prediction"];
+                fourthPredClass.text = classification_result["other_pred"][3]["group"];
+
+                fifthPrediction.text = classification_result["other_pred"][4]["prediction"];
+                fifthPredClass.text = classification_result["other_pred"][4]["group"];
 
                 if (predictionClicked)
                 {
