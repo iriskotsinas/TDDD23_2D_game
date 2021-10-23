@@ -473,9 +473,9 @@ public class UserInputSpawn : MonoBehaviour
 
     public void enableObject()
     {
+        inputIsOpen = true;
         NewPlayer.Instance.Freeze(true);
         gameObjectToEnable.SetActive(true);
-        inputIsOpen = true;
         myInputField.Select();
     }
 

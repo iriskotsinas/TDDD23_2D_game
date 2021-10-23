@@ -24,6 +24,7 @@ public class ObjectSpawnerFromML : MonoBehaviour
     public Sprite[] otherSprites;
 
     private GameObject newObj;
+    [SerializeField] private GameObject myParticles;
 
     private void Update()
     {
@@ -63,9 +64,8 @@ public class ObjectSpawnerFromML : MonoBehaviour
             newObj = new GameObject("Could not be found");
         }
 
-
-
-
+        GameObject particles = Instantiate(myParticles, newObj.transform.position, Quaternion.identity) as GameObject;
+        
         //if (groupName == "vehicles")
         //{
         //    var _collider = FindObjectOfType<CapsuleCollider2D>();
@@ -84,6 +84,12 @@ public class ObjectSpawnerFromML : MonoBehaviour
         Sprite _sprite = newObj.GetComponent<SpriteRenderer>().sprite;
 
         setColliderToFitSprite(ref polygonCollider, ref _sprite);
+
+        if(groupName == "others")
+        {
+            polygonCollider.transform.localScale = new Vector3(3f, 3f, 0);
+            newObj.transform.localScale = new Vector3(3f, 3f, 0);
+        }
 
         return newObj;
     }
@@ -118,7 +124,6 @@ public class ObjectSpawnerFromML : MonoBehaviour
         }
         else if (groupName == "others")
         {
-            Debug.Log(newObject.GetComponent<Other>().otherName);
             newObject.GetComponent<Other>().otherName = objectName;
         }
         

@@ -18316,6 +18316,12 @@ PrefabInstance:
       propertyPath: dialogueStringB
       value: BookB
       objectReference: {fileID: 0}
+    - target: {fileID: 212157339048286382, guid: 0d2ce79f41aef454d804e654a4a633f6,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 43c5f06b3f6b74fc181f0823c2a2cfe1,
+        type: 3}
     - target: {fileID: 735774801046613203, guid: 0d2ce79f41aef454d804e654a4a633f6,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -19470,7 +19476,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 259863c109880184591569d5e6a8e811,
+      objectReference: {fileID: 21300000, guid: dfabe25b6eeca4743b30b2e5ba7c9eae,
         type: 3}
     - target: {fileID: 4051111764682172795, guid: 88a8d955817662340b0a4a718fe17486,
         type: 3}
@@ -31332,7 +31338,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 259863c109880184591569d5e6a8e811, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dfabe25b6eeca4743b30b2e5ba7c9eae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -31675,7 +31681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347706725930344, guid: c345d020d8c8e45249365b7be6b37765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 4583348649137432, guid: c345d020d8c8e45249365b7be6b37765, type: 3}
       propertyPath: m_LocalPosition.y
@@ -31730,6 +31736,12 @@ PrefabInstance:
       propertyPath: characterName
       value: LockedDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 212589760400135548, guid: c345d020d8c8e45249365b7be6b37765,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 43c5f06b3f6b74fc181f0823c2a2cfe1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c345d020d8c8e45249365b7be6b37765, type: 3}
 --- !u!1001 &2088044663674515636
