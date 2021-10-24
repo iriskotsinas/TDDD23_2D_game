@@ -724,6 +724,14 @@ public class VoiceSpawner : MonoBehaviour
         keywordRecognizer.OnPhraseRecognized += RecVoice;
         hasStarted = false;
     }
+    void OnDestroy()
+    {
+        if (keywordRecognizer != null)
+        {
+            keywordRecognizer.Stop();
+            keywordRecognizer.Dispose();
+        }
+    }
 
     public void Update()
     {
