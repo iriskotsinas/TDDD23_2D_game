@@ -35,7 +35,7 @@ public class MenuButton : MonoBehaviour
 				if (thisIndex == PLAY_GAME)
                 {
 					Debug.Log("Switch intro scene");
-					SceneManager.LoadScene(sceneName: "CutScene1");
+					SceneManager.LoadScene(sceneName: "CutScene");
 				}
 				else if( thisIndex == SANDBOX)
                 {
