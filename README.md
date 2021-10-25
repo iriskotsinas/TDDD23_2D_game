@@ -1,4 +1,4 @@
-TODO: ADD IMAGE HERE
+![alt text](https://github.com/iriskotsinas/TDDD23_2D_game/blob/master/freeyourmind.png)
 # Introduction
 This is a 2D platformer game made for the course TDDD23 that challenges your creativity and gives you a freedom to play the game however you want to play it. It starts with a player waking up next to a magic(AI) book and not remembering anything. He, together with this book, goes on an adventure to find out more. The book is made using DoodleNet which is a pretrained model that uses "Googles Quick Draw!" dataset to train the model.
 
@@ -23,11 +23,15 @@ Then start the Unity Project and build the game/play in the editor.
 
 # Prerequisites
 Unity 2020.03.18.f1
+
 Node
 # API
 API is built with node and express and uses Tensorflow for node.
 # Game & Controls
 **Q:** Open Canvas to draw
+
 **E:** Pickup items
+
 **R:** Open textbox to write
+
 **WASD + Space:** Movement + Jump
