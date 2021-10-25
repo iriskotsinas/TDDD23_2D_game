@@ -4,7 +4,7 @@ This is a 2D platformer game made for the course TDDD23 that challenges your cre
 
 **There are three ways to play this game:**
 1. Draw your way through it. Draw items and spawn
-2. Say the objects name (if you give microphone-permission to the game)
+2. Say the objects name (Current only works for **Windows**. If you give microphone-permission to the game)
 3. Write the objects name
 
 Since we say *"A picture is worth a thousand words"*, we made that drawing objects makes them more powerful. For weapons, they deal more damage, for vehicles they are faster and so on.
@@ -17,6 +17,7 @@ git clone https://github.com/iriskotsinas/TDDD23_2D_game.git
 Start the API that controls the books prediction
 ```bash 
 cd TDDD23_2D_game/API
+npm install
 node server2.js
 ```
 Then start the Unity Project and build the game/play in the editor.
